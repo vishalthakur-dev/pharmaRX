@@ -84,7 +84,6 @@ export default async function ProductPage({ params }) {
     name: `${name} | Pharma RX`,
     description,
     url: productUrl,
-    mainEntity: { "@id": productUrl },
   };
 
   return (
