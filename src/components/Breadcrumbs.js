@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://pharmac.example";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://pharma-rx.vercel.app";
 
 export default function Breadcrumbs({ items }) {
   const schema = {

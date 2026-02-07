@@ -4,7 +4,7 @@ export default function JsonLd({ products, listName = "Vitamins & Supplements" }
     position: index + 1,
     item: {
       "@type": "Product",
-      "@id": `https://pharmac.example/${p.slug}/${p.id}`,
+      "@id": `https://pharma-rx.vercel.app/${p.slug}/${p.id}`,
       name: p.name,
       description: p.description,
       image: p.imageUrl,
