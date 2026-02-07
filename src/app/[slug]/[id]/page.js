@@ -31,6 +31,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://pharma-rx.vercel.app";
+
 export default async function ProductPage({ params }) {
   const { slug, id } = await params;
   const product = getProductBySlugAndId(slug, id);
@@ -45,14 +47,50 @@ export default async function ProductPage({ params }) {
     rating,
     reviewCount,
     brand,
+    currentPrice,
     highlights = [],
   } = product;
 
   const productIndex = parseInt(id, 10) - 1;
   const images = getProductSliderImages(productIndex);
 
+  const productUrl = `${BASE_URL}/${slug}/${id}`;
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": productUrl,
+    name,
+    description,
+    image: imageUrl.startsWith("/") ? `${BASE_URL}${imageUrl}` : imageUrl,
+    ...(brand && { brand: { "@type": "Brand", name: brand } }),
+    offers: {
+      "@type": "Offer",
+      url: productUrl,
+      price: currentPrice,
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: rating,
+      reviewCount,
+      bestRating: 5,
+    },
+  };
+
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${name} | Pharma RX`,
+    description,
+    url: productUrl,
+    mainEntity: { "@id": productUrl },
+  };
+
   return (
     <div className="min-h-screen bg-zinc-50">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }} />
       <header className="border-b border-zinc-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <Logo />
