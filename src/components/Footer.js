@@ -115,7 +115,10 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col items-center gap-6 border-t border-zinc-200 pt-8 sm:flex-row sm:flex-wrap sm:justify-between">
           <div className="order-2 flex-1 text-center sm:order-1 sm:text-left">
-            <Link href="/about" className="text-sm text-cyan-600 hover:underline focus:outline-none focus:ring-2 focus:ring-cyan-500">Know more about Pharma RX</Link>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 sm:justify-start">
+              <Link href="/about" className="text-sm text-cyan-600 hover:underline focus:outline-none focus:ring-2 focus:ring-cyan-500">Know more about Pharma RX</Link>
+              <Link href="/sitemap.xml" className="text-sm text-cyan-600 hover:underline focus:outline-none focus:ring-2 focus:ring-cyan-500">Sitemap</Link>
+            </div>
             <p className="mt-2 max-w-3xl text-xs text-zinc-500">
               © {currentYear} Pharma RX. All rights reserved. All medicines are dispensed in compliance with applicable drugs and cosmetics regulations. We do not process requests for Schedule X and habit-forming drugs.
             </p>

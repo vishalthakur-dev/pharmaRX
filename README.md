@@ -58,6 +58,9 @@ Listing pages are server-rendered per request (SSR) when you hit a URL with `?pa
 **Pagination**  
 Page 1 is the base path (no `?page=1`). Page 2+ use `?page=n`. Canonical and prev/next point to those URLs so engines don’t treat every page as the same URL.
 
+**Sitemap**  
+An XML sitemap is generated at `/sitemap.xml` via `src/app/sitemap.js`. It includes the home and category URLs, all paginated category pages, every product page, and the cart. A link to it is in the footer so users and crawlers can find it easily.
+
 ---
 
 ## Tech
