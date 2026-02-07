@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, cartQty = 0, onAdd, onPlus, onMinus }) {
   const {
     id,
     slug,
@@ -20,6 +20,7 @@ export default function ProductCard({ product }) {
   } = product;
 
   const productUrl = `/${slug}/${id}`;
+  const showAdd = cartQty === 0;
 
   return (
     <article
@@ -77,13 +78,49 @@ export default function ProductCard({ product }) {
           </div>
         </div>
       </Link>
-      <Link
-        href={productUrl}
-        className="mt-1.5 block w-full rounded-lg border-2 border-cyan-600 bg-white py-1.5 text-center text-xs font-semibold uppercase tracking-wide text-cyan-600 transition-colors hover:bg-cyan-50 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 sm:mt-2 sm:py-1.5 sm:text-sm"
-        aria-label={`Add ${name} to cart`}
-      >
-        ADD
-      </Link>
+      {showAdd ? (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            onAdd?.();
+          }}
+          className="mt-1.5 block w-full rounded-lg border-2 border-cyan-600 bg-white py-1.5 text-center text-xs font-semibold uppercase tracking-wide text-cyan-600 transition-colors hover:bg-cyan-50 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 sm:mt-2 sm:py-1.5 sm:text-sm"
+          aria-label={`Add ${name} to cart`}
+        >
+          ADD
+        </button>
+      ) : (
+        <div className="mt-1.5 flex w-full justify-center rounded-lg border-2 border-cyan-600 bg-white py-1 sm:mt-2">
+          <div className="inline-flex items-stretch overflow-hidden rounded border border-zinc-300 bg-zinc-50">
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                onMinus?.();
+              }}
+              className="flex h-7 w-8 shrink-0 items-center justify-center border-r border-zinc-300 bg-white text-sm font-medium text-cyan-600 transition-colors hover:bg-cyan-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-inset"
+              aria-label="Decrease quantity"
+            >
+              −
+            </button>
+            <span className="flex h-7 min-w-[1.75rem] items-center justify-center border-r border-zinc-300 bg-white px-1.5 text-sm font-semibold text-zinc-900" aria-live="polite">
+              {cartQty}
+            </span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                onPlus?.();
+              }}
+              className="flex h-7 w-8 shrink-0 items-center justify-center bg-white text-sm font-medium text-cyan-600 transition-colors hover:bg-cyan-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-inset"
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
+          </div>
+        </div>
+      )}
     </article>
   );
 }

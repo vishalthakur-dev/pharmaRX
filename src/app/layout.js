@@ -16,6 +16,9 @@ export const metadata = {
   title: "Pharma RX | Vitamins & Supplements",
   description:
     "Shop vitamins and supplements at Pharma RX. Omega 3, Vitamin D3, calcium, and more. Best prices and fast delivery.",
+  icons: {
+    icon: "/favicon-16x16.png",
+  },
   openGraph: {
     title: "Pharma RX | Vitamins & Supplements",
     description: "Shop vitamins and supplements. Best prices and fast delivery.",
