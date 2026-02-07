@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const BASE_PATH = "/category/vitamins-and-supplements";
 
 export default function Pagination({ currentPage, totalPages }) {
@@ -17,20 +15,25 @@ export default function Pagination({ currentPage, totalPages }) {
 
   const hrefFor = (num) => (num === 1 ? BASE_PATH : `${BASE_PATH}?page=${num}`);
 
+  const linkClass =
+    "inline-flex h-10 items-center justify-center rounded-lg border border-zinc-300 bg-white px-4 text-sm font-medium text-zinc-700 hover:bg-zinc-50 focus:ring-2 focus:ring-cyan-500";
+  const pageBtnClass =
+    "flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-300 bg-white text-sm font-medium text-zinc-700 hover:bg-zinc-50 focus:ring-2 focus:ring-cyan-500";
+
   return (
     <nav
       className="mt-8 flex flex-wrap items-center justify-center gap-2"
       aria-label="Pagination"
     >
       {prevPage ? (
-        <Link
+        <a
           href={hrefFor(prevPage)}
-          className="inline-flex h-10 items-center justify-center rounded-lg border border-zinc-300 bg-white px-4 text-sm font-medium text-zinc-700 hover:bg-zinc-50 focus:ring-2 focus:ring-cyan-500"
+          className={linkClass}
           rel="prev"
           aria-label="Previous page"
         >
           Previous
-        </Link>
+        </a>
       ) : (
         <span
           className="inline-flex h-10 cursor-not-allowed items-center justify-center rounded-lg border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-400"
@@ -44,13 +47,13 @@ export default function Pagination({ currentPage, totalPages }) {
         {start > 1 && (
           <>
             <li>
-              <Link
+              <a
                 href={hrefFor(1)}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-300 bg-white text-sm font-medium text-zinc-700 hover:bg-zinc-50 focus:ring-2 focus:ring-cyan-500"
+                className={pageBtnClass}
                 aria-label="Page 1"
               >
                 1
-              </Link>
+              </a>
             </li>
             {start > 2 && <li className="px-1 text-zinc-400">…</li>}
           </>
@@ -66,13 +69,13 @@ export default function Pagination({ currentPage, totalPages }) {
                 {num}
               </span>
             ) : (
-              <Link
+              <a
                 href={hrefFor(num)}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-300 bg-white text-sm font-medium text-zinc-700 hover:bg-zinc-50 focus:ring-2 focus:ring-cyan-500"
+                className={pageBtnClass}
                 aria-label={`Page ${num}`}
               >
                 {num}
-              </Link>
+              </a>
             )}
           </li>
         ))}
@@ -80,27 +83,27 @@ export default function Pagination({ currentPage, totalPages }) {
           <>
             {end < totalPages - 1 && <li className="px-1 text-zinc-400">…</li>}
             <li>
-              <Link
+              <a
                 href={hrefFor(totalPages)}
-                className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-300 bg-white text-sm font-medium text-zinc-700 hover:bg-zinc-50 focus:ring-2 focus:ring-cyan-500"
+                className={pageBtnClass}
                 aria-label={`Page ${totalPages}`}
               >
                 {totalPages}
-              </Link>
+              </a>
             </li>
           </>
         )}
       </ul>
 
       {nextPage ? (
-        <Link
+        <a
           href={hrefFor(nextPage)}
-          className="inline-flex h-10 items-center justify-center rounded-lg border border-zinc-300 bg-white px-4 text-sm font-medium text-zinc-700 hover:bg-zinc-50 focus:ring-2 focus:ring-cyan-500"
+          className={linkClass}
           rel="next"
           aria-label="Next page"
         >
           Next
-        </Link>
+        </a>
       ) : (
         <span
           className="inline-flex h-10 cursor-not-allowed items-center justify-center rounded-lg border border-zinc-200 bg-zinc-50 px-4 text-sm text-zinc-400"
